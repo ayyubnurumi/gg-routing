@@ -1,10 +1,14 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import React from 'react';
+import { useNavigate } from 'react-router';
 
 export const Login = () => {
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    const navigate = useNavigate()
+  const onFinish = () => {
+    // console.log('Received values of form: ', values);
+    localStorage.getItem('username', 'password')
+    navigate('/dashboard')
   };
 
   return (
@@ -56,7 +60,7 @@ export const Login = () => {
         <Button type="primary" htmlType="submit" className="login-form-button">
           Log in
         </Button>
-        Or <a href="-">register now!</a>
+        Or <a href="/registration">register now!</a>
       </Form.Item>
     </Form>
   );
