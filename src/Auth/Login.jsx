@@ -4,7 +4,7 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 
 export const Login = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate()
   const onFinish = () => {
     // console.log('Received values of form: ', values);
     localStorage.getItem('username', 'password')

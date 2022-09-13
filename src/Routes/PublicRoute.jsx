@@ -4,15 +4,15 @@ import { Outlet } from "react-router";
 const isUserLogin = () => {
     const user = localStorage.getItem('username')
     if (!user){
-        return false;
-    } else {
         return true;
+    } else {
+        return false; 
     }
 }
 
 export const PublicRoute = () => {
     isUserLogin()
-    // console.log(user)
+    
     return(
         <Outlet />
     )
