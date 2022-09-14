@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router";
+import { Navigate, Outlet } from "react-router";
 
 const isUserLogin = () => {
     const user = localStorage.getItem('username')
@@ -11,8 +11,8 @@ const isUserLogin = () => {
 }
 
 export const ProtectedRoute = () => {
-    isUserLogin()
+    const getIn = isUserLogin()
     return(
-        <Outlet />
+        getIn ? <Outlet /> : <Navigate to={"/login"} replace />
     )
 }

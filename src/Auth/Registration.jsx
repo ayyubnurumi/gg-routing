@@ -41,9 +41,9 @@ export const Registration = () => {
 
   const navigate = useNavigate()
 
-  const onFinish = () => {
-    // console.log("Received values of form: ", data);
-    localStorage.setItem("username", "password", "phone", "gender", "email")
+  const onFinish = (data) => {
+    // console.log("Received values of form: ", data)
+    localStorage.setItem(data)
     navigate("/login") 
   };
 

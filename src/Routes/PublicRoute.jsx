@@ -1,19 +1,19 @@
 import React from "react";
-import { Outlet } from "react-router";
+import { Navigate, Outlet } from "react-router";
 
 const isUserLogin = () => {
     const user = localStorage.getItem('username')
     if (!user){
-        return true;
+        return false;
     } else {
-        return false; 
+        return true; 
     }
 }
 
 export const PublicRoute = () => {
-    isUserLogin()
+    const getOut = isUserLogin()
     
     return(
-        <Outlet />
+        getOut ? <Navigate to={"/dashboard"} replace /> : <Outlet /> 
     )
 }
