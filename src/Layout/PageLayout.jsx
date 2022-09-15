@@ -1,9 +1,12 @@
-import {
-  LaptopOutlined,
-  NotificationOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
-import { Layout, Menu, Button } from "antd";
+// import {
+//   LaptopOutlined,
+//   NotificationOutlined,
+//   UserOutlined,
+// } from "@ant-design/icons";
+import { Layout, Menu } from "antd";
+// import MenuDivider from "antd/lib/menu/MenuDivider";
+// import Item from "antd/lib/list/Item";
+import MenuItem from "antd/lib/menu/MenuItem";
 import React from "react";
 import { Outlet, useNavigate } from "react-router";
 
@@ -14,23 +17,23 @@ const { Header, Content, Sider } = Layout;
 //   label: `nav ${key}`,
 // }));
 
-const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
-  (icon, index) => {
-    const key = String(index + 1);
-    return {
-      key: `sub${key}`,
-      icon: React.createElement(icon),
-      label: `subnav ${key}`,
-      children: new Array(4).fill(null).map((_, j) => {
-        const subKey = index * 4 + j + 1;
-        return {
-          key: subKey,
-          label: `option${subKey}`,
-        };
-      }),
-    };
-  }
-);
+// const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
+//   (icon, index) => {
+//     const key = String(index + 1);
+//     return {
+//       key: `sub${key}`,
+//       icon: React.createElement(icon),
+//       label: `subnav ${key}`,
+//       children: new Array(4).fill(null).map((_, j) => {
+//         const subKey = index * 4 + j + 1;
+//         return {
+//           key: subKey,
+//           label: `option${subKey}`,
+//         };
+//       }),
+//     };
+//   }
+// );
 
 export const PageLayout = () => {
   const navigate = useNavigate();
@@ -48,24 +51,29 @@ export const PageLayout = () => {
           // defaultSelectedKeys={["2"]}
           // items={items1}
         >
-          <Button style={{marginTop: 15, marginRight: 5}} onClick={()=>navigate('/dashboard')} type="primary">home</Button>
-          <Button style={{marginTop: 15, marginRight: 5}} onClick={()=>navigate('/content1')} type="primary">profile</Button>
-          <Button style={{marginTop: 15, marginRight: 5}} onClick={()=>navigate('/content2')} type="primary">about</Button>
-          <Button style={{marginTop: 15}} onClick={() => logout()} type="primary" danger >log out</Button>
+          <MenuItem style={{ marginRight: 5}} onClick={()=>navigate('/dashboard')} type="primary">home</MenuItem>
+          <MenuItem style={{ marginRight: 5}} onClick={()=>navigate('/content1')} type="primary">profile</MenuItem>
+          <MenuItem style={{ marginRight: 930}} onClick={()=>navigate('/content2')} type="primary">about</MenuItem>
+          
+          <MenuItem className="logout" onClick={() => logout()} type="primary" danger >log out</MenuItem>
         </Menu>
       </Header>
       <Layout>
         <Sider width={200} className="site-layout-background">
           <Menu
             mode="inline"
-            defaultSelectedKeys={["1"]}
-            defaultOpenKeys={["sub1"]}
+            // defaultSelectedKeys={["1"]}
+            // defaultOpenKeys={["sub1"]}
             style={{
               height: "100%",
               borderRight: 0,
             }}
-            items={items2}
-          />
+            // items={items2}
+          >
+            <MenuItem style={{marginTop: 15, marginRight: 5}} onClick={()=>navigate('/dashboard')} type="primary">home</MenuItem>
+            <MenuItem style={{marginTop: 15, marginRight: 5}} onClick={()=>navigate('/content1')} type="primary">profile</MenuItem>
+            <MenuItem style={{marginTop: 15, marginRight: 5}} onClick={()=>navigate('/content2')} type="primary">about</MenuItem>
+          </Menu>
         </Sider>
         <Layout
           style={{
@@ -77,7 +85,7 @@ export const PageLayout = () => {
             style={{
               padding: 24,
               margin: 0,
-              minHeight: 280,
+              minHeight: 550,
             }}
           >
             <Outlet />
