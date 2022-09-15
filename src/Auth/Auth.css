@@ -1,0 +1,17 @@
+.login {
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    margin-top: 100px;
+    max-width: 500px;
+    height: fit-content;
+}
+
+.registration {
+    align-items: center;
+    text-align: center;
+    border: 1px solid black;
+    margin: auto;
+    margin-top: 100px;
+    max-width: 500px;
+}

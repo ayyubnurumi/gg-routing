@@ -59,146 +59,150 @@ export const Registration = () => {
   };
 
   return (
-    <Form
-      {...formItemLayout}
-      form={form}
-      name="register"
-      onFinish={onFinish}
-      scrollToFirstError
-    >
-      <Form.Item
-        name="email"
-        label="E-mail"
-        onChange={(e) => setemail(e.target.value)}
-        rules={[
-          {
-            type: "email",
-            message: "The input is not valid E-mail!",
-          },
-          {
-            required: true,
-            message: "Please input your E-mail!",
-          },
-        ]}
+    <div className="registration">
+      <Form
+        {...formItemLayout}
+        form={form}
+        name="register"
+        onFinish={onFinish}
+        scrollToFirstError
       >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        name="password"
-        label="Password"
-        onChange={(e) => setpassword(e.target.value)}
-        rules={[
-          {
-            required: true,
-            message: "Please input your password!",
-          },
-        ]}
-        hasFeedback
-      >
-        <Input.Password />
-      </Form.Item>
-
-      <Form.Item
-        name="confirm"
-        label="Confirm Password"
-        dependencies={["password"]}
-        hasFeedback
-        rules={[
-          {
-            required: true,
-            message: "Please confirm your password!",
-          },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue("password") === value) {
-                return Promise.resolve();
-              }
-
-              return Promise.reject(
-                new Error("The two passwords that you entered do not match!")
-              );
+        <Form.Item
+          name="email"
+          label="E-mail"
+          onChange={(e) => setemail(e.target.value)}
+          rules={[
+            {
+              type: "email",
+              message: "The input is not valid E-mail!",
             },
-          }),
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
+            {
+              required: true,
+              message: "Please input your E-mail!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
 
-      <Form.Item
-        name="username"
-        label="Username"
-        onChange={(e) => setusername(e.target.value)}
-        tooltip="What do you want others to call you?"
-        rules={[
-          {
-            required: true,
-            message: "Please input your username!",
-            whitespace: true,
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+        <Form.Item
+          name="password"
+          label="Password"
+          onChange={(e) => setpassword(e.target.value)}
+          rules={[
+            {
+              required: true,
+              message: "Please input your password!",
+            },
+          ]}
+          hasFeedback
+        >
+          <Input.Password />
+        </Form.Item>
 
-      <Form.Item
-        name="phone"
-        label="Phone Number"
-        onChange={(e) => setphone(e.target.value)}
-        rules={[
-          {
-            required: true,
-            message: "Please input your phone number!",
-          },
-        ]}
-      >
-        <Input
-          style={{
-            width: "100%",
-          }}
-        />
-      </Form.Item>
+        <Form.Item
+          name="confirm"
+          label="Confirm Password"
+          dependencies={["password"]}
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: "Please confirm your password!",
+            },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue("password") === value) {
+                  return Promise.resolve();
+                }
 
-      <Form.Item
-        name="gender"
-        label="Gender"
-        onChange={(e) => setgender(e.target.value)}
-        rules={[
-          {
-            required: true,
-            message: "Please select gender!",
-          },
-        ]}
-      >
-        <Select placeholder="select your gender">
-          <Option value="male">Male</Option>
-          <Option value="female">Female</Option>
-          <Option value="other">Other</Option>
-        </Select>
-      </Form.Item>
+                return Promise.reject(
+                  new Error("The two passwords that you entered do not match!")
+                );
+              },
+            }),
+          ]}
+        >
+          <Input.Password />
+        </Form.Item>
 
-      <Form.Item
-        name="agreement"
-        valuePropName="checked"
-        rules={[
-          {
-            validator: (_, value) =>
-              value
-                ? Promise.resolve()
-                : Promise.reject(new Error("Should accept agreement")),
-          },
-        ]}
-        {...tailFormItemLayout}
-      >
-        <Checkbox>
-          I have read the <a href="-">agreement</a>
-        </Checkbox>
-      </Form.Item>
-      <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
-          Register
-        </Button>
-      </Form.Item>
-    </Form>
+        <Form.Item
+          name="username"
+          // placeholder="Username"
+          onChange={(e) => setusername(e.target.value)}
+          tooltip="What do you want others to call you?"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+              whitespace: true,
+            },
+          ]}
+        >
+          <Input 
+          placeholder="Username"/>
+        </Form.Item>
+
+        <Form.Item
+          name="phone"
+          label="Phone Number"
+          onChange={(e) => setphone(e.target.value)}
+          rules={[
+            {
+              required: true,
+              message: "Please input your phone number!",
+            },
+          ]}
+        >
+          <Input
+            style={{
+              width: "100%",
+            }}
+          />
+        </Form.Item>
+
+        <Form.Item
+          name="gender"
+          label="Gender"
+          onChange={(e) => setgender(e.target.value)}
+          rules={[
+            {
+              required: true,
+              message: "Please select gender!",
+            },
+          ]}
+        >
+          <Select placeholder="select your gender">
+            <Option value="male">Male</Option>
+            <Option value="female">Female</Option>
+            <Option value="other">Other</Option>
+          </Select>
+        </Form.Item>
+
+        
+            <Form.Item
+              name="agreement"
+              valuePropName="checked"
+              rules={[
+                {
+                  validator: (_, value) =>
+                    value
+                      ? Promise.resolve()
+                      : Promise.reject(new Error("Should accept agreement")),
+                },
+              ]}
+              {...tailFormItemLayout}
+            >
+              <Checkbox>
+                I have read the <a href="-">agreement</a>
+              </Checkbox>
+            </Form.Item>
+            <Form.Item {...tailFormItemLayout}>
+              <Button type="primary" htmlType="submit">
+                Register
+              </Button>
+            </Form.Item>
+          </Form>
+    </div>
   );
 };
