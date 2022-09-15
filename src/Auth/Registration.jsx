@@ -1,5 +1,5 @@
 import { Button, Checkbox, Form, Input, Select } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
@@ -41,9 +41,20 @@ export const Registration = () => {
 
   const navigate = useNavigate()
 
-  const onFinish = (data) => {
-    // console.log("Received values of form: ", data)
-    localStorage.setItem(data)
+  const [username, setusername] = useState('');
+  const [email, setemail] = useState('');
+  const [password, setpassword] = useState('');
+  const [phone, setphone] = useState('');
+  const [gender, setgender] = useState('');
+  
+  const onFinish = () => {
+    
+    localStorage.setItem("username", JSON.stringify(username))
+    localStorage.setItem("email", JSON.stringify(email))
+    localStorage.setItem("password", JSON.stringify(password))
+    localStorage.setItem("phone", JSON.stringify(phone))
+    localStorage.setItem("gender", JSON.stringify(gender))
+
     navigate("/login") 
   };
 
@@ -58,6 +69,7 @@ export const Registration = () => {
       <Form.Item
         name="email"
         label="E-mail"
+        onChange={(e) => setemail(e.target.value)}
         rules={[
           {
             type: "email",
@@ -75,6 +87,7 @@ export const Registration = () => {
       <Form.Item
         name="password"
         label="Password"
+        onChange={(e) => setpassword(e.target.value)}
         rules={[
           {
             required: true,
@@ -115,6 +128,7 @@ export const Registration = () => {
       <Form.Item
         name="username"
         label="Username"
+        onChange={(e) => setusername(e.target.value)}
         tooltip="What do you want others to call you?"
         rules={[
           {
@@ -130,6 +144,7 @@ export const Registration = () => {
       <Form.Item
         name="phone"
         label="Phone Number"
+        onChange={(e) => setphone(e.target.value)}
         rules={[
           {
             required: true,
@@ -147,6 +162,7 @@ export const Registration = () => {
       <Form.Item
         name="gender"
         label="Gender"
+        onChange={(e) => setgender(e.target.value)}
         rules={[
           {
             required: true,

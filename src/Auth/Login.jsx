@@ -1,13 +1,19 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
-import React from 'react';
+import React, {useState} from 'react';
 import { useNavigate } from 'react-router';
 
 export const Login = () => {
   const navigate = useNavigate()
+  
+  const [username, setusername] = useState('');
+  const [password, setpassword] = useState('');
+  
   const onFinish = () => {
-    // console.log('Received values of form: ', values);
-    localStorage.getItem('username', 'password')
+
+    localStorage.setItem("username", JSON.stringify(username))
+    localStorage.getItem("password", JSON.stringify(password))
+
     navigate('/dashboard')
   };
 
@@ -22,6 +28,7 @@ export const Login = () => {
     >
       <Form.Item
         name="username"
+        onChange={(e) => setusername(e.target.value)}
         rules={[
           {
             required: true,
@@ -33,6 +40,7 @@ export const Login = () => {
       </Form.Item>
       <Form.Item
         name="password"
+        onChange={(e) => setpassword(e.target.value)}
         rules={[
           {
             required: true,
