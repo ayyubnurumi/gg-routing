@@ -5,12 +5,15 @@ import {
 } from "@ant-design/icons";
 import { Layout, Menu, Button } from "antd";
 import React from "react";
-import { useNavigate } from "react-router";
+import { Outlet, useNavigate } from "react-router";
+
 const { Header, Content, Sider } = Layout;
-const items1 = ["1", "2", "3"].map((key) => ({
-  key,
-  label: `nav ${key}`,
-}));
+
+// const items1 = ["1", "2", "3"].map((key) => ({
+//   key,
+//   label: `nav ${key}`,
+// }));
+
 const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
   (icon, index) => {
     const key = String(index + 1);
@@ -29,7 +32,7 @@ const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
   }
 );
 
-export const Dashboard = () => {
+export const PageLayout = () => {
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem('username');
@@ -42,13 +45,15 @@ export const Dashboard = () => {
         <Menu
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={["2"]}
-          items={items1}
-        />
+          // defaultSelectedKeys={["2"]}
+          // items={items1}
+        >
+          <Button style={{marginTop: 15, marginRight: 5}} onClick={()=>navigate('/dashboard')} type="primary">home</Button>
+          <Button style={{marginTop: 15, marginRight: 5}} onClick={()=>navigate('/content1')} type="primary">profile</Button>
+          <Button style={{marginTop: 15, marginRight: 5}} onClick={()=>navigate('/content2')} type="primary">about</Button>
+          <Button style={{marginTop: 15}} onClick={() => logout()} type="primary" danger >log out</Button>
+        </Menu>
       </Header>
-      <Button onClick={() => logout()} type="primary" danger>
-        log out
-      </Button>
       <Layout>
         <Sider width={200} className="site-layout-background">
           <Menu
@@ -75,7 +80,7 @@ export const Dashboard = () => {
               minHeight: 280,
             }}
           >
-            Content
+            <Outlet />
           </Content>
         </Layout>
       </Layout>

@@ -10,7 +10,7 @@ const formItemLayout = {
       span: 24,
     },
     sm: {
-      span: 8,
+      span: 7,
     },
   },
   wrapperCol: {
@@ -18,7 +18,7 @@ const formItemLayout = {
       span: 24,
     },
     sm: {
-      span: 16,
+      span: 18,
     },
   },
 };
@@ -31,7 +31,7 @@ const tailFormItemLayout = {
     },
     sm: {
       span: 16,
-      offset: 8,
+      offset: 4,
     },
   },
 };
@@ -39,23 +39,22 @@ const tailFormItemLayout = {
 export const Registration = () => {
   const [form] = Form.useForm();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const [username, setusername] = useState('');
-  const [email, setemail] = useState('');
-  const [password, setpassword] = useState('');
-  const [phone, setphone] = useState('');
-  const [gender, setgender] = useState('');
-  
+  const [username, setusername] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [phone, setphone] = useState("");
+  const [gender, setgender] = useState("");
+
   const onFinish = () => {
-    
-    localStorage.setItem("username", JSON.stringify(username))
-    localStorage.setItem("email", JSON.stringify(email))
-    localStorage.setItem("password", JSON.stringify(password))
-    localStorage.setItem("phone", JSON.stringify(phone))
-    localStorage.setItem("gender", JSON.stringify(gender))
+    localStorage.setItem("username", JSON.stringify(username));
+    localStorage.setItem("email", JSON.stringify(email));
+    localStorage.setItem("password", JSON.stringify(password));
+    localStorage.setItem("phone", JSON.stringify(phone));
+    localStorage.setItem("gender", JSON.stringify(gender));
 
-    navigate("/login") 
+    navigate("/login");
   };
 
   return (
@@ -82,7 +81,7 @@ export const Registration = () => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="E-mail" />
         </Form.Item>
 
         <Form.Item
@@ -97,7 +96,7 @@ export const Registration = () => {
           ]}
           hasFeedback
         >
-          <Input.Password />
+          <Input.Password placeholder="Password" />
         </Form.Item>
 
         <Form.Item
@@ -123,12 +122,12 @@ export const Registration = () => {
             }),
           ]}
         >
-          <Input.Password />
+          <Input.Password placeholder="Confirm Password" />
         </Form.Item>
 
         <Form.Item
           name="username"
-          // placeholder="Username"
+          label="Username"
           onChange={(e) => setusername(e.target.value)}
           tooltip="What do you want others to call you?"
           rules={[
@@ -139,13 +138,12 @@ export const Registration = () => {
             },
           ]}
         >
-          <Input 
-          placeholder="Username"/>
+          <Input placeholder="Username" />
         </Form.Item>
 
         <Form.Item
           name="phone"
-          label="Phone Number"
+          label="Phone"
           onChange={(e) => setphone(e.target.value)}
           rules={[
             {
@@ -158,6 +156,7 @@ export const Registration = () => {
             style={{
               width: "100%",
             }}
+            placeholder="Phone Number"
           />
         </Form.Item>
 
@@ -179,30 +178,29 @@ export const Registration = () => {
           </Select>
         </Form.Item>
 
-        
-            <Form.Item
-              name="agreement"
-              valuePropName="checked"
-              rules={[
-                {
-                  validator: (_, value) =>
-                    value
-                      ? Promise.resolve()
-                      : Promise.reject(new Error("Should accept agreement")),
-                },
-              ]}
-              {...tailFormItemLayout}
-            >
-              <Checkbox>
-                I have read the <a href="-">agreement</a>
-              </Checkbox>
-            </Form.Item>
-            <Form.Item {...tailFormItemLayout}>
-              <Button type="primary" htmlType="submit">
-                Register
-              </Button>
-            </Form.Item>
-          </Form>
+        <Form.Item
+          name="agreement"
+          valuePropName="checked"
+          rules={[
+            {
+              validator: (_, value) =>
+                value
+                  ? Promise.resolve()
+                  : Promise.reject(new Error("Should accept agreement")),
+            },
+          ]}
+          {...tailFormItemLayout}
+        >
+          <Checkbox>
+            I have read the <a href="-">agreement</a>
+          </Checkbox>
+        </Form.Item>
+        <Form.Item {...tailFormItemLayout}>
+          <Button type="primary" htmlType="submit">
+            Register
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 };

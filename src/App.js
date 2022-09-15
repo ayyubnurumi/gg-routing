@@ -1,12 +1,15 @@
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 
 import './App.css';
-import { Dashboard } from './Pages/Dashboard';
+import { PageLayout } from './Layout/PageLayout';
 import { Login } from './Auth/Login';
 import { Registration } from './Auth/Registration';
 import { PublicRoute } from './Routes/PublicRoute';
 import { ProtectedRoute } from './Routes/ProtectedRoute';
 import { AuthLayout } from './Auth/AuthLayout';
+import { Dashboard } from './Pages/dashboard';
+import { Content1 } from './Pages/content1';
+import { Content2 } from './Pages/content2';
 
 function App() {
   return (
@@ -20,8 +23,12 @@ function App() {
           </Route>
         </Route>
         <Route path='/' element={<ProtectedRoute />} >
-          <Route index path='/dashboard' element={<Dashboard />} />
-          <Route path='/' element={<Navigate to={'/dashboard'} replace />} />
+          <Route path='/' element={<PageLayout />} >
+            <Route index path='/dashboard' element={<Dashboard />} />
+            <Route path='/content1' element={<Content1 />} />
+            <Route path='/content2' element={<Content2 />} />
+            <Route path='/' element={<Navigate to={'/dashboard'} replace />} />
+          </Route>
         </Route>
         <Route path='*' element={<Navigate to={'/'} replace />} />
       </Routes>
