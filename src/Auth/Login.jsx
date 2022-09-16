@@ -12,7 +12,7 @@ export const Login = () => {
   
   const onFinish = () => {
 
-    localStorage.setItem("username", JSON.stringify(username))
+    localStorage.getItem("username", JSON.stringify(username))
     localStorage.getItem("password", JSON.stringify(password))
 
     navigate('/dashboard')
