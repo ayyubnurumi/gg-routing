@@ -10,6 +10,7 @@ import { AuthLayout } from './Auth/AuthLayout';
 import { Dashboard } from './Pages/dashboard';
 import { Content1 } from './Pages/content1';
 import { Content2 } from './Pages/content2';
+import { Agreement } from './Auth/Agreement';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/' element={<AuthLayout />} >
             <Route index path='/login' element={<Login />} />
             <Route path='/registration' element={<Registration />} />
+            <Route path='/agreement' element={<Agreement />} />
             <Route path='/' element={<Navigate to={'/login'} replace />} />
           </Route>
         </Route>

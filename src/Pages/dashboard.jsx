@@ -1,7 +1,9 @@
 import React from "react";
 
 export const Dashboard = () => {
+    const rawUser = localStorage.getItem('username')
+    const user = rawUser.replace(/^"(.+(?="$))"$/, '$1')
     return(
-        <p>this is home</p>
+        <h1 style={{fontSize: 27}}>Hi {user}, welcome home!</h1>
     )
 }

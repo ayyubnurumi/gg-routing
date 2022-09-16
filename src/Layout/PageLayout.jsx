@@ -1,15 +1,14 @@
+import React from "react";
+import { Outlet, useNavigate } from "react-router";
+
 import {
   LaptopOutlined,
   NotificationOutlined,
   UserOutlined,
-  LogoutOutlined
+  LogoutOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu } from "antd";
-// import MenuDivider from "antd/lib/menu/MenuDivider";
-// import Item from "antd/lib/list/Item";
 import MenuItem from "antd/lib/menu/MenuItem";
-import React from "react";
-import { Outlet, useNavigate } from "react-router";
 
 const { Header, Content, Sider } = Layout;
 
@@ -39,8 +38,8 @@ const { Header, Content, Sider } = Layout;
 export const PageLayout = () => {
   const navigate = useNavigate();
   const logout = () => {
-    localStorage.removeItem('username');
-    navigate('/login');
+    localStorage.removeItem("username");
+    navigate("/login");
   };
   return (
     <Layout>
@@ -52,11 +51,41 @@ export const PageLayout = () => {
           // defaultSelectedKeys={["2"]}
           // items={items1}
         >
-          <MenuItem style={{ marginRight: 5}} onClick={()=>navigate('/dashboard')} type="primary">home</MenuItem>
-          <MenuItem style={{ marginRight: 5}} onClick={()=>navigate('/content1')} type="primary">profile</MenuItem>
-          <MenuItem style={{ marginRight: 930}} onClick={()=>navigate('/content2')} type="primary">about</MenuItem>
-          
-          <MenuItem ><Button icon={<LogoutOutlined />} onClick={() => logout()} type="primary" danger >logOut</Button></MenuItem>
+          <Menu.Item
+            key={`home`}
+            style={{ marginRight: 5 }}
+            onClick={() => navigate("/dashboard")}
+            type="primary"
+          >
+            home
+          </Menu.Item>
+          <Menu.Item
+            key={`profile`}
+            style={{ marginRight: 5 }}
+            onClick={() => navigate("/content1")}
+            type="primary"
+          >
+            profile
+          </Menu.Item>
+          <Menu.Item
+            key={`about`}
+            style={{ marginRight: 930 }}
+            onClick={() => navigate("/content2")}
+            type="primary"
+          >
+            about
+          </Menu.Item>
+
+          <Menu.Item>
+            <Button
+              icon={<LogoutOutlined />}
+              onClick={() => logout()}
+              type="primary"
+              danger
+            >
+              logOut
+            </Button>
+          </Menu.Item>
         </Menu>
       </Header>
       <Layout>
@@ -71,9 +100,30 @@ export const PageLayout = () => {
             }}
             // items={items2}
           >
-            <MenuItem icon={<LaptopOutlined />} style={{marginTop: 15, marginRight: 5}} onClick={()=>navigate('/dashboard')} type="primary">home</MenuItem>
-            <MenuItem icon={<UserOutlined />} style={{marginTop: 15, marginRight: 5}} onClick={()=>navigate('/content1')} type="primary">profile</MenuItem>
-            <MenuItem icon={<NotificationOutlined />} style={{marginTop: 15, marginRight: 5}} onClick={()=>navigate('/content2')} type="primary">about</MenuItem>
+            <MenuItem
+              icon={<LaptopOutlined />}
+              style={{ marginTop: 15, marginRight: 5 }}
+              onClick={() => navigate("/dashboard")}
+              type="primary"
+            >
+              home
+            </MenuItem>
+            <MenuItem
+              icon={<UserOutlined />}
+              style={{ marginTop: 15, marginRight: 5 }}
+              onClick={() => navigate("/content1")}
+              type="primary"
+            >
+              profile
+            </MenuItem>
+            <MenuItem
+              icon={<NotificationOutlined />}
+              style={{ marginTop: 15, marginRight: 5 }}
+              onClick={() => navigate("/content2")}
+              type="primary"
+            >
+              about
+            </MenuItem>
           </Menu>
         </Sider>
         <Layout
