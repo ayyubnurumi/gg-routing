@@ -1,9 +1,10 @@
-// import {
-//   LaptopOutlined,
-//   NotificationOutlined,
-//   UserOutlined,
-// } from "@ant-design/icons";
-import { Layout, Menu } from "antd";
+import {
+  LaptopOutlined,
+  NotificationOutlined,
+  UserOutlined,
+  LogoutOutlined
+} from "@ant-design/icons";
+import { Button, Layout, Menu } from "antd";
 // import MenuDivider from "antd/lib/menu/MenuDivider";
 // import Item from "antd/lib/list/Item";
 import MenuItem from "antd/lib/menu/MenuItem";
@@ -55,7 +56,7 @@ export const PageLayout = () => {
           <MenuItem style={{ marginRight: 5}} onClick={()=>navigate('/content1')} type="primary">profile</MenuItem>
           <MenuItem style={{ marginRight: 930}} onClick={()=>navigate('/content2')} type="primary">about</MenuItem>
           
-          <MenuItem className="logout" onClick={() => logout()} type="primary" danger >log out</MenuItem>
+          <MenuItem ><Button icon={<LogoutOutlined />} onClick={() => logout()} type="primary" danger >logOut</Button></MenuItem>
         </Menu>
       </Header>
       <Layout>
@@ -70,9 +71,9 @@ export const PageLayout = () => {
             }}
             // items={items2}
           >
-            <MenuItem style={{marginTop: 15, marginRight: 5}} onClick={()=>navigate('/dashboard')} type="primary">home</MenuItem>
-            <MenuItem style={{marginTop: 15, marginRight: 5}} onClick={()=>navigate('/content1')} type="primary">profile</MenuItem>
-            <MenuItem style={{marginTop: 15, marginRight: 5}} onClick={()=>navigate('/content2')} type="primary">about</MenuItem>
+            <MenuItem icon={<LaptopOutlined />} style={{marginTop: 15, marginRight: 5}} onClick={()=>navigate('/dashboard')} type="primary">home</MenuItem>
+            <MenuItem icon={<UserOutlined />} style={{marginTop: 15, marginRight: 5}} onClick={()=>navigate('/content1')} type="primary">profile</MenuItem>
+            <MenuItem icon={<NotificationOutlined />} style={{marginTop: 15, marginRight: 5}} onClick={()=>navigate('/content2')} type="primary">about</MenuItem>
           </Menu>
         </Sider>
         <Layout

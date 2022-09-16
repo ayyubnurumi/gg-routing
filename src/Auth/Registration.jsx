@@ -1,4 +1,6 @@
 import { Button, Checkbox, Form, Input, Select } from "antd";
+import { UserOutlined, MailOutlined, SafetyOutlined, SafetyCertificateOutlined,
+PhoneOutlined, SmileOutlined, ManOutlined, WomanOutlined } from "@ant-design/icons"
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -7,30 +9,42 @@ const { Option } = Select;
 const formItemLayout = {
   labelCol: {
     xs: {
-      span: 24,
+      span: 0,
     },
     sm: {
-      span: 7,
+      span: 0,
     },
   },
   wrapperCol: {
     xs: {
-      span: 24,
+      span: 32,
     },
     sm: {
-      span: 18,
+      span: 32,
     },
+    md: {
+      span: 64,
+    },
+    lg: {
+      span: 64 
+    },
+    xl: {
+      span: 128
+    },
+    xxl: {
+      span: 128
+    }
   },
 };
 
 const tailFormItemLayout = {
   wrapperCol: {
     xs: {
-      span: 24,
+      span: 16,
       offset: 0,
     },
     sm: {
-      span: 16,
+      span: 32,
       offset: 4,
     },
   },
@@ -66,9 +80,26 @@ export const Registration = () => {
         onFinish={onFinish}
         scrollToFirstError
       >
+
+        <Form.Item
+          name="username"
+          // label="Username"
+          onChange={(e) => setusername(e.target.value)}
+          tooltip="What do you want others to call you?"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+              whitespace: true,
+            },
+          ]}
+        >
+          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+        </Form.Item>
+
         <Form.Item
           name="email"
-          label="E-mail"
+          // label="E-mail"
           onChange={(e) => setemail(e.target.value)}
           rules={[
             {
@@ -81,12 +112,12 @@ export const Registration = () => {
             },
           ]}
         >
-          <Input placeholder="E-mail" />
+          <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder="E-mail" />
         </Form.Item>
 
         <Form.Item
           name="password"
-          label="Password"
+          // label="Password"
           onChange={(e) => setpassword(e.target.value)}
           rules={[
             {
@@ -96,12 +127,12 @@ export const Registration = () => {
           ]}
           hasFeedback
         >
-          <Input.Password placeholder="Password" />
+          <Input.Password prefix={<SafetyOutlined className="site-form-item-icon" />} placeholder="Password" />
         </Form.Item>
 
         <Form.Item
           name="confirm"
-          label="Confirm Password"
+          // label="Confirm Password"
           dependencies={["password"]}
           hasFeedback
           rules={[
@@ -122,28 +153,12 @@ export const Registration = () => {
             }),
           ]}
         >
-          <Input.Password placeholder="Confirm Password" />
-        </Form.Item>
-
-        <Form.Item
-          name="username"
-          label="Username"
-          onChange={(e) => setusername(e.target.value)}
-          tooltip="What do you want others to call you?"
-          rules={[
-            {
-              required: true,
-              message: "Please input your username!",
-              whitespace: true,
-            },
-          ]}
-        >
-          <Input placeholder="Username" />
+          <Input.Password prefix={<SafetyCertificateOutlined className="site-form-item-icon" />} placeholder="Confirm Password" />
         </Form.Item>
 
         <Form.Item
           name="phone"
-          label="Phone"
+          // label="Phone"
           onChange={(e) => setphone(e.target.value)}
           rules={[
             {
@@ -156,14 +171,15 @@ export const Registration = () => {
             style={{
               width: "100%",
             }}
+            prefix={<PhoneOutlined className="site-form-item-icon" />}
             placeholder="Phone Number"
           />
         </Form.Item>
 
         <Form.Item
           name="gender"
-          label="Gender"
-          onChange={(e) => setgender(e.target.value)}
+          // label="Gender"
+          
           rules={[
             {
               required: true,
@@ -171,10 +187,10 @@ export const Registration = () => {
             },
           ]}
         >
-          <Select placeholder="select your gender">
-            <Option value="male">Male</Option>
-            <Option value="female">Female</Option>
-            <Option value="other">Other</Option>
+          <Select placeholder="select your gender" onChange={(e) => setgender(e.target.value)}>
+            <Option icon={<ManOutlined />} value="male">cwk</Option>
+            <Option icon={<WomanOutlined />} value="female">cwk</Option>
+            <Option icon={<SmileOutlined />} value="other">blm tumbuh</Option>
           </Select>
         </Form.Item>
 

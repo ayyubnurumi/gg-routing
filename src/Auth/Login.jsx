@@ -67,9 +67,10 @@ export const Login = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button">
+          <Button style={{marginBottom: 5}} type="primary" htmlType="submit" className="login-form-button">
             Log in
           </Button>
+          <br />
           Or <a href="/registration">register now!</a>
         </Form.Item>
       </Form>
