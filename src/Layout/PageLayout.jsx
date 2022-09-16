@@ -69,7 +69,7 @@ export const PageLayout = () => {
           </Menu.Item>
           <Menu.Item
             key={`about`}
-            style={{ marginRight: 930 }}
+            style={{ margin: "auto", marginLeft: 0 }}
             onClick={() => navigate("/content2")}
             type="primary"
           >
@@ -80,6 +80,7 @@ export const PageLayout = () => {
             <Button
               icon={<LogoutOutlined />}
               onClick={() => logout()}
+              style={{float: "inline-end"}}
               type="primary"
               danger
             >
