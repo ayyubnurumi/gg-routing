@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import axios from "axios";
 
-import { Button, Checkbox, Form, Input, Select } from "antd";
+import { Button, Checkbox, Form, Input } from "antd";
 import {
   UserOutlined,
   MailOutlined,
   SafetyOutlined,
   SafetyCertificateOutlined,
-  PhoneOutlined
+  // PhoneOutlined
 } from "@ant-design/icons";
 
-const { Option } = Select;
+// const { Option } = Select;
 
 const formItemLayout = {
   labelCol: {
@@ -59,23 +60,30 @@ const tailFormItemLayout = {
 export const Registration = () => {
   const [form] = Form.useForm();
 
-  const navigate = useNavigate();
-
-  const [username, setusername] = useState("");
+  const [userName, setusername] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const [phone, setphone] = useState("");
-  const [gender, setgender] = useState("");
+  // const [phone, setphone] = useState("");
+  // const [gender, setgender] = useState("");
+  const [navigate, setnavigate] = useState(false)
 
-  const onFinish = () => {
-    localStorage.setItem("username", JSON.stringify(username));
-    localStorage.setItem("email", JSON.stringify(email));
-    localStorage.setItem("password", JSON.stringify(password));
-    localStorage.setItem("phone", JSON.stringify(phone));
-    localStorage.setItem("gender", JSON.stringify(gender));
-    
-    navigate("/login");
+  const onFinish = async e => {
+    // e.preventDefault();
+    await axios.post('https://nodejs-backend-api-playground.herokuapp.com/auth/user/registration', {
+      userName, email, password
+    })
+    // localStorage.setItem("username", JSON.stringify(username));
+    // localStorage.setItem("email", JSON.stringify(email));
+    // localStorage.setItem("password", JSON.stringify(password));
+    // localStorage.setItem("phone", JSON.stringify(phone));
+    // localStorage.setItem("gender", JSON.stringify(gender));
+    // console.log(userName, email, password)
+    setnavigate(true);
   };
+
+  if (navigate) {
+    return <Navigate to='/login' />
+  }
 
   return (
     <div className="registration">
@@ -87,7 +95,7 @@ export const Registration = () => {
         scrollToFirstError
       >
         <Form.Item
-          name="username"
+          name="userName"
           onChange={(e) => setusername(e.target.value)}
           rules={[
             {
@@ -171,7 +179,7 @@ export const Registration = () => {
           />
         </Form.Item>
 
-        <Form.Item
+        {/* <Form.Item
           name="phone"
           onChange={(e) => setphone(e.target.value)}
           rules={[
@@ -188,9 +196,9 @@ export const Registration = () => {
             prefix={<PhoneOutlined className="site-form-item-icon" />}
             placeholder="Phone Number"
           />
-        </Form.Item>
+        </Form.Item> */}
 
-        <Form.Item
+        {/* <Form.Item
           name="gender"
           rules={[
             {
@@ -213,7 +221,7 @@ export const Registration = () => {
               just Human
             </Option>
           </Select>
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item
           name="agreement"

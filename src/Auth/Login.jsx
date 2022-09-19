@@ -1,22 +1,31 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
+import axios from 'axios';
 import React, {useState} from 'react';
-import { useNavigate } from 'react-router';
+import { Navigate } from 'react-router';
 import './Auth.css'
 
 export const Login = () => {
-  const navigate = useNavigate()
   
-  const [username, setusername] = useState('');
+  const [user, setusername] = useState('');
   const [password, setpassword] = useState('');
+  const [navigate, setnavigate] = useState(false)
   
-  const onFinish = () => {
+  const onFinish = async e => {
+    const response = await axios.post('https://nodejs-backend-api-playground.herokuapp.com/auth/user/login', {
+      user, password
+    })
+    console.log(response.data)
+    // axios.defaults.headers.common['Authorization']=`Bearer ${data['refreshToken']}`;
+    // localStorage.getItem("username", JSON.stringify(username))
+    // localStorage.getItem("password", JSON.stringify(password))
 
-    localStorage.getItem("username", JSON.stringify(username))
-    localStorage.getItem("password", JSON.stringify(password))
-
-    navigate('/dashboard')
+    setnavigate(true)
   };
+
+  if (navigate) {
+    return <Navigate to='/dashboard' />
+  }
 
   return (
     <div className='login'>
@@ -29,7 +38,7 @@ export const Login = () => {
         onFinish={onFinish}
       >
         <Form.Item
-          name="username"
+          name="user"
           onChange={(e) => setusername(e.target.value)}
           rules={[
             {
