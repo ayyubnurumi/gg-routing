@@ -1,34 +1,24 @@
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
-import axios from 'axios';
-import React, {useState} from 'react';
-import { Navigate } from 'react-router';
-import './Auth.css'
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Checkbox, Form, Input } from "antd";
+import React, { useState } from "react";
+import { useNavigate } from "react-router";
+import { userLogin } from "../service/AuthService";
+import "./Auth.css";
 
 export const Login = () => {
-  
-  const [user, setusername] = useState('');
-  const [password, setpassword] = useState('');
-  const [navigate, setnavigate] = useState(false)
-  
-  const onFinish = async e => {
-    const response = await axios.post('https://nodejs-backend-api-playground.herokuapp.com/auth/user/login', {
-      user, password
-    })
-    console.log(response.data)
-    // axios.defaults.headers.common['Authorization']=`Bearer ${data['refreshToken']}`;
-    // localStorage.getItem("username", JSON.stringify(username))
-    // localStorage.getItem("password", JSON.stringify(password))
+  const navigate = useNavigate()
+  const [payload, setpayload] = useState({
+    user: '',
+    password: '',
+  })
+  // const [user, setuser] = useState("");
+  // const [password, setpassword] = useState("");
+  // const [navigate, setnavigate] = useState(false);
 
-    setnavigate(true)
-  };
-
-  if (navigate) {
-    return <Navigate to='/dashboard' />
-  }
+  const onFinish = userLogin(payload, navigate)
 
   return (
-    <div className='login'>
+    <div className="login">
       <Form
         name="normal_login"
         className="login-form"
@@ -39,23 +29,26 @@ export const Login = () => {
       >
         <Form.Item
           name="user"
-          onChange={(e) => setusername(e.target.value)}
+          onChange={(e) => setpayload({...setpayload, user: e.target.value})}
           rules={[
             {
               required: true,
-              message: 'Please input your Username!',
+              message: "Please input your Username!",
             },
           ]}
         >
-          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+          <Input
+            prefix={<UserOutlined className="site-form-item-icon" />}
+            placeholder="Username"
+          />
         </Form.Item>
         <Form.Item
           name="password"
-          onChange={(e) => setpassword(e.target.value)}
+          onChange={(e) => setpayload({...setpayload, password: e.target.value})}
           rules={[
             {
               required: true,
-              message: 'Please input your Password!',
+              message: "Please input your Password!",
             },
           ]}
         >
@@ -76,7 +69,12 @@ export const Login = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button style={{marginBottom: 5}} type="primary" htmlType="submit" className="login-form-button">
+          <Button
+            style={{ marginBottom: 5 }}
+            type="primary"
+            htmlType="submit"
+            className="login-form-button"
+          >
             Log in
           </Button>
           <br />

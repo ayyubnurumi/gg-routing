@@ -9,6 +9,7 @@ import {
 } from "@ant-design/icons";
 import { Button, Layout, Menu } from "antd";
 import MenuItem from "antd/lib/menu/MenuItem";
+import { userLogout } from "../service/AuthService";
 
 const { Header, Content, Sider } = Layout;
 
@@ -37,10 +38,8 @@ const { Header, Content, Sider } = Layout;
 
 export const PageLayout = () => {
   const navigate = useNavigate();
-  const logout = () => {
-    localStorage.clear("username");
-    navigate("/login");
-  };
+  const logout = userLogout()
+  
   return (
     <Layout>
       <Header className="header">

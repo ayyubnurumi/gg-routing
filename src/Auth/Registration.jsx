@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
-import axios from "axios";
 
 import { Button, Checkbox, Form, Input } from "antd";
 import {
@@ -8,10 +6,9 @@ import {
   MailOutlined,
   SafetyOutlined,
   SafetyCertificateOutlined,
-  // PhoneOutlined
 } from "@ant-design/icons";
-
-// const { Option } = Select;
+import { userRegistration } from "../service/AuthService";
+import { useNavigate } from "react-router";
 
 const formItemLayout = {
   labelCol: {
@@ -60,30 +57,15 @@ const tailFormItemLayout = {
 export const Registration = () => {
   const [form] = Form.useForm();
 
-  const [userName, setusername] = useState("");
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
-  // const [phone, setphone] = useState("");
-  // const [gender, setgender] = useState("");
-  const [navigate, setnavigate] = useState(false)
+  const navigate = useNavigate()
 
-  const onFinish = async e => {
-    // e.preventDefault();
-    await axios.post('https://nodejs-backend-api-playground.herokuapp.com/auth/user/registration', {
-      userName, email, password
-    })
-    // localStorage.setItem("username", JSON.stringify(username));
-    // localStorage.setItem("email", JSON.stringify(email));
-    // localStorage.setItem("password", JSON.stringify(password));
-    // localStorage.setItem("phone", JSON.stringify(phone));
-    // localStorage.setItem("gender", JSON.stringify(gender));
-    // console.log(userName, email, password)
-    setnavigate(true);
-  };
+  const [payload, setpayload] = useState({
+    userName: '',
+    email: '',
+    password: '',
+  })
 
-  if (navigate) {
-    return <Navigate to='/login' />
-  }
+  const onFinish = userRegistration(payload, navigate)
 
   return (
     <div className="registration">
@@ -96,7 +78,7 @@ export const Registration = () => {
       >
         <Form.Item
           name="userName"
-          onChange={(e) => setusername(e.target.value)}
+          onChange={(e) => setpayload({...setpayload, userName: e.target.value})}
           rules={[
             {
               required: true,
@@ -104,7 +86,7 @@ export const Registration = () => {
               whitespace: true,
             },
           ]}
-          >
+        >
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
             tooltip="What do you want others to call you?"
@@ -114,7 +96,7 @@ export const Registration = () => {
 
         <Form.Item
           name="email"
-          onChange={(e) => setemail(e.target.value)}
+          onChange={(e) => setpayload({...setpayload, email: e.target.value})}
           rules={[
             {
               type: "email",
@@ -134,7 +116,7 @@ export const Registration = () => {
 
         <Form.Item
           name="password"
-          onChange={(e) => setpassword(e.target.value)}
+          onChange={(e) => setpayload({...setpayload, password: e.target.value})}
           rules={[
             {
               required: true,
@@ -179,50 +161,6 @@ export const Registration = () => {
           />
         </Form.Item>
 
-        {/* <Form.Item
-          name="phone"
-          onChange={(e) => setphone(e.target.value)}
-          rules={[
-            {
-              required: true,
-              message: "Please input your phone number!",
-            },
-          ]}
-        >
-          <Input
-            style={{
-              width: "100%",
-            }}
-            prefix={<PhoneOutlined className="site-form-item-icon" />}
-            placeholder="Phone Number"
-          />
-        </Form.Item> */}
-
-        {/* <Form.Item
-          name="gender"
-          rules={[
-            {
-              required: true,
-              message: "Please select gender!",
-            },
-          ]}
-        >
-          <Select
-            placeholder="select your gender"
-            onChange={(value) => setgender(value)}
-          >
-            <Option key='Male' value='Male'>
-              Male
-            </Option>
-            <Option key='Female' value='Female'>
-              Female
-            </Option>
-            <Option key='Other' value='Other'>
-              just Human
-            </Option>
-          </Select>
-        </Form.Item> */}
-
         <Form.Item
           name="agreement"
           valuePropName="checked"
@@ -241,7 +179,7 @@ export const Registration = () => {
           </Checkbox>
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
-          <Button style={{marginBottom: 5}} type="primary" htmlType="submit">
+          <Button style={{ marginBottom: 5 }} type="primary" htmlType="submit">
             Register
           </Button>
           <br />
