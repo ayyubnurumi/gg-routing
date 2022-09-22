@@ -27,8 +27,8 @@ function App() {
         <Route path='/' element={<ProtectedRoute />} >
           <Route path='/' element={<PageLayout />} >
             <Route index path='/dashboard' element={<Dashboard />} />
-            <Route path='/content1' element={<Content1 />} />
-            <Route path='/content2' element={<Content2 />} />
+            <Route path='/profile' element={<Content1 />} />
+            <Route path='/about' element={<Content2 />} />
             <Route path='/' element={<Navigate to={'/dashboard'} replace />} />
           </Route>
         </Route>

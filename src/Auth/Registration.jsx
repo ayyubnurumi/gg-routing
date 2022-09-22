@@ -87,9 +87,9 @@ export const Registration = () => {
           ]}
           >
           <Input
+            autoComplete="new-username"
             onChange={(e) => setpayload({...payload, userName: e.target.value})}
             prefix={<UserOutlined className="site-form-item-icon" />}
-            tooltip="What do you want others to call you?"
             placeholder="Username"
           />
         </Form.Item>
@@ -108,6 +108,7 @@ export const Registration = () => {
           ]}
           >
           <Input
+            autoComplete="new-email"
             onChange={(e) => setpayload({...payload, email: e.target.value})}
             prefix={<MailOutlined className="site-form-item-icon" />}
             placeholder="E-mail"
@@ -124,8 +125,9 @@ export const Registration = () => {
             },
           ]}
           hasFeedback
-        >
+          >
           <Input.Password
+            autoComplete="new-password"
             prefix={<SafetyOutlined className="site-form-item-icon" />}
             placeholder="Password"
           />
@@ -145,7 +147,7 @@ export const Registration = () => {
                 if (!value || getFieldValue("password") === value) {
                   return Promise.resolve();
                 }
-
+                
                 return Promise.reject(
                   new Error("The two passwords that you entered do not match!")
                 );
@@ -154,9 +156,8 @@ export const Registration = () => {
           ]}
         >
           <Input.Password
-            prefix={
-              <SafetyCertificateOutlined className="site-form-item-icon" />
-            }
+            autoComplete="new-password"
+            prefix={<SafetyCertificateOutlined className="site-form-item-icon" />}
             placeholder="Confirm Password"
           />
         </Form.Item>
