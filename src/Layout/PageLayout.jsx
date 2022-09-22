@@ -38,7 +38,7 @@ const { Header, Content, Sider } = Layout;
 
 export const PageLayout = () => {
   const navigate = useNavigate();
-  const logout = userLogout()
+  const logout =()=> userLogout(navigate)
   
   return (
     <Layout>

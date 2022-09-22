@@ -65,7 +65,7 @@ export const Registration = () => {
     password: '',
   })
 
-  const onFinish = userRegistration(payload, navigate)
+  const onFinish =()=> userRegistration(payload, navigate)
 
   return (
     <div className="registration">
@@ -78,7 +78,6 @@ export const Registration = () => {
       >
         <Form.Item
           name="userName"
-          onChange={(e) => setpayload({...setpayload, userName: e.target.value})}
           rules={[
             {
               required: true,
@@ -86,8 +85,9 @@ export const Registration = () => {
               whitespace: true,
             },
           ]}
-        >
+          >
           <Input
+            onChange={(e) => setpayload({...payload, userName: e.target.value})}
             prefix={<UserOutlined className="site-form-item-icon" />}
             tooltip="What do you want others to call you?"
             placeholder="Username"
@@ -96,7 +96,6 @@ export const Registration = () => {
 
         <Form.Item
           name="email"
-          onChange={(e) => setpayload({...setpayload, email: e.target.value})}
           rules={[
             {
               type: "email",
@@ -107,8 +106,9 @@ export const Registration = () => {
               message: "Please input your E-mail!",
             },
           ]}
-        >
+          >
           <Input
+            onChange={(e) => setpayload({...payload, email: e.target.value})}
             prefix={<MailOutlined className="site-form-item-icon" />}
             placeholder="E-mail"
           />
@@ -116,7 +116,7 @@ export const Registration = () => {
 
         <Form.Item
           name="password"
-          onChange={(e) => setpayload({...setpayload, password: e.target.value})}
+          onChange={(e) => setpayload({...payload, password: e.target.value})}
           rules={[
             {
               required: true,

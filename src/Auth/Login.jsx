@@ -8,14 +8,12 @@ import "./Auth.css";
 export const Login = () => {
   const navigate = useNavigate()
   const [payload, setpayload] = useState({
-    user: '',
-    password: '',
+    user: "",
+    password: "",
   })
-  // const [user, setuser] = useState("");
-  // const [password, setpassword] = useState("");
-  // const [navigate, setnavigate] = useState(false);
 
-  const onFinish = userLogin(payload, navigate)
+  const onFinish =()=> userLogin(payload, navigate)
+  localStorage.setItem('username', JSON.stringify(payload.user))
 
   return (
     <div className="login">
@@ -29,7 +27,7 @@ export const Login = () => {
       >
         <Form.Item
           name="user"
-          onChange={(e) => setpayload({...setpayload, user: e.target.value})}
+          onChange={(e) => setpayload({...payload, user: e.target.value})}
           rules={[
             {
               required: true,
@@ -44,7 +42,7 @@ export const Login = () => {
         </Form.Item>
         <Form.Item
           name="password"
-          onChange={(e) => setpayload({...setpayload, password: e.target.value})}
+          onChange={(e) => setpayload({...payload, password: e.target.value})}
           rules={[
             {
               required: true,
