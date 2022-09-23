@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 
 import { Button, Checkbox, Form, Input } from "antd";
 import {
@@ -8,7 +9,6 @@ import {
   SafetyCertificateOutlined,
 } from "@ant-design/icons";
 import { userRegistration } from "../service/AuthService";
-import { useNavigate } from "react-router";
 
 const formItemLayout = {
   labelCol: {
@@ -57,15 +57,32 @@ const tailFormItemLayout = {
 export const Registration = () => {
   const [form] = Form.useForm();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [payload, setpayload] = useState({
-    userName: '',
-    email: '',
-    password: '',
-  })
+    userName: "",
+    email: "",
+    password: "",
+  });
+  const [checked, setchecked] = useState(false);
+  const [loadings, setLoadings] = useState([]);
 
-  const onFinish =()=> userRegistration(payload, navigate)
+  const enterLoading = (index) => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[index] = true;
+      return newLoadings;
+    });
+    setTimeout(() => {
+      setLoadings((prevLoadings) => {
+        const newLoadings = [...prevLoadings];
+        newLoadings[index] = false;
+        return newLoadings;
+      });
+    }, 6000);
+  };
+
+  const onFinish = () => userRegistration(payload, navigate);
 
   return (
     <div className="registration">
@@ -85,10 +102,12 @@ export const Registration = () => {
               whitespace: true,
             },
           ]}
-          >
+        >
           <Input
             autoComplete="new-username"
-            onChange={(e) => setpayload({...payload, userName: e.target.value})}
+            onChange={(e) =>
+              setpayload({ ...payload, userName: e.target.value })
+            }
             prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Username"
           />
@@ -106,10 +125,10 @@ export const Registration = () => {
               message: "Please input your E-mail!",
             },
           ]}
-          >
+        >
           <Input
             autoComplete="new-email"
-            onChange={(e) => setpayload({...payload, email: e.target.value})}
+            onChange={(e) => setpayload({ ...payload, email: e.target.value })}
             prefix={<MailOutlined className="site-form-item-icon" />}
             placeholder="E-mail"
           />
@@ -117,7 +136,7 @@ export const Registration = () => {
 
         <Form.Item
           name="password"
-          onChange={(e) => setpayload({...payload, password: e.target.value})}
+          onChange={(e) => setpayload({ ...payload, password: e.target.value })}
           rules={[
             {
               required: true,
@@ -125,7 +144,7 @@ export const Registration = () => {
             },
           ]}
           hasFeedback
-          >
+        >
           <Input.Password
             autoComplete="new-password"
             prefix={<SafetyOutlined className="site-form-item-icon" />}
@@ -147,7 +166,7 @@ export const Registration = () => {
                 if (!value || getFieldValue("password") === value) {
                   return Promise.resolve();
                 }
-                
+
                 return Promise.reject(
                   new Error("The two passwords that you entered do not match!")
                 );
@@ -157,13 +176,16 @@ export const Registration = () => {
         >
           <Input.Password
             autoComplete="new-password"
-            prefix={<SafetyCertificateOutlined className="site-form-item-icon" />}
+            prefix={
+              <SafetyCertificateOutlined className="site-form-item-icon" />
+            }
             placeholder="Confirm Password"
           />
         </Form.Item>
 
         <Form.Item
           name="agreement"
+          onChange={() => setchecked(true)}
           valuePropName="checked"
           rules={[
             {
@@ -180,7 +202,18 @@ export const Registration = () => {
           </Checkbox>
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
-          <Button style={{ marginBottom: 5 }} type="primary" htmlType="submit">
+          <Button
+            htmlType="submit"
+            style={{ marginBottom: 5 }}
+            onClick={()=>enterLoading(0)}
+            type="primary"
+            loading={loadings[0]}
+            disabled={
+              payload.userName && payload.email && payload.password && checked
+                ? false
+                : true
+            }
+          >
             Register
           </Button>
           <br />

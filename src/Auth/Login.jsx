@@ -68,10 +68,15 @@ export const Login = () => {
 
         <Form.Item>
           <Button
-            style={{ marginBottom: 5 }}
-            type="primary"
             htmlType="submit"
             className="login-form-button"
+            style={{ marginBottom: 5 }}
+            type="primary"
+            disabled={
+              payload.user && payload.password
+                ? false
+                : true
+            }
           >
             Log in
           </Button>
