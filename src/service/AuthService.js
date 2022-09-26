@@ -9,7 +9,7 @@ export const userRegistration = async (payload, navigate) => {
         // console.log(registration.data.data);
         alert(registration.data.message)
     } catch (error) {
-        // console.log(error.response.data);
+        console.log(error.response.data);
         alert(error.response.data.message)
     }
 };

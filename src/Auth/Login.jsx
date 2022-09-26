@@ -12,6 +12,23 @@ export const Login = () => {
     password: "",
   })
 
+  const [loadings, setLoadings] = useState([]);
+
+  const enterLoading = (index) => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[index] = true;
+      return newLoadings;
+    });
+    setTimeout(() => {
+      setLoadings((prevLoadings) => {
+        const newLoadings = [...prevLoadings];
+        newLoadings[index] = false;
+        return newLoadings;
+      });
+    }, 6000);
+  };
+
   const onFinish =()=> userLogin(payload, navigate)
   localStorage.setItem('username', JSON.stringify(payload.user))
 
@@ -71,7 +88,9 @@ export const Login = () => {
             htmlType="submit"
             className="login-form-button"
             style={{ marginBottom: 5 }}
+            onClick={()=>enterLoading(0)}
             type="primary"
+            loading={loadings[0]}
             disabled={
               payload.user && payload.password
                 ? false
