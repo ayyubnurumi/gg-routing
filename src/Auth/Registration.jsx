@@ -79,7 +79,7 @@ export const Registration = () => {
         newLoadings[index] = false;
         return newLoadings;
       });
-    }, 6000);
+    }, 4000);
   };
 
   const onFinish = () => userRegistration(payload, navigate);

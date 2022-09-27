@@ -12,10 +12,21 @@ import { userLogout } from "../service/AuthService";
 
 const { Header, Content, Sider } = Layout;
 
-const items1 = ["dashboard", "profile", "about"].map((key) => ({
-  key,
-  label: `${key}`,
-}));
+const items1 = [
+  { key: "dashboard", label: "dashboard", icon: <LaptopOutlined /> },
+  { key: "profile", label: "profile", icon: <UserOutlined /> },
+  { key: "about", label: "about", icon: <NotificationOutlined /> },
+  {
+    key: "logout",
+    label: (
+      <Button type="primary" danger>
+        logOut
+      </Button>
+    ),
+    style: ({marginRight: '5px'}),
+    icon: <LogoutOutlined />,
+  },
+];
 
 const items2 = [
   { key: "dashboard", label: "dashboard", icon: <LaptopOutlined /> },
@@ -54,8 +65,18 @@ export const PageLayout = () => {
           mode="horizontal"
           onClick={onClick}
           selectedKeys={[current]}
-          items={items1}
-        />
+          //items={items1}
+        >
+          <Menu.Item
+            key= "logout"
+            icon= {<LogoutOutlined />}
+            style={styleLogout}
+            >
+              <Button type="primary" danger>
+                logOut
+              </Button>
+          </Menu.Item>
+        </Menu>
       </Header>
       <Layout>
         <Sider width={200} className="site-layout-background">
@@ -99,3 +120,8 @@ export const PageLayout = () => {
     </Layout>
   );
 };
+
+const styleLogout = {
+  position: "absolute",
+  right: "10px"
+}
