@@ -1,55 +1,51 @@
 import React, { useState } from "react";
 import { Outlet, useNavigate } from "react-router";
-
+import { userLogout } from "../service/AuthService";
+import { Button, Layout, Menu } from "antd";
 import {
   LaptopOutlined,
   NotificationOutlined,
   UserOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
-import { Button, Layout, Menu } from "antd";
-import { userLogout } from "../service/AuthService";
 
 const { Header, Content, Sider } = Layout;
 
-const items1 = [
-  { key: "dashboard", label: "dashboard", icon: <LaptopOutlined /> },
-  { key: "profile", label: "profile", icon: <UserOutlined /> },
-  { key: "about", label: "about", icon: <NotificationOutlined /> },
-  {
-    key: "logout",
-    label: (
-      <Button type="primary" danger>
-        logOut
-      </Button>
-    ),
-    style: ({marginRight: '5px'}),
-    icon: <LogoutOutlined />,
-  },
-];
-
-const items2 = [
-  { key: "dashboard", label: "dashboard", icon: <LaptopOutlined /> },
-  { key: "profile", label: "profile", icon: <UserOutlined /> },
-  { key: "about", label: "about", icon: <NotificationOutlined /> },
-];
-
-const danger = [
-  {
-    key: "logout",
-    label: (
-      <Button type="primary" danger>
-        logOut
-      </Button>
-    ),
-    icon: <LogoutOutlined />,
-  },
-];
+const logoutbtn = {
+  position: "absolute",
+  right: "10px",
+};
 
 export const PageLayout = () => {
   const navigate = useNavigate();
   const logout = () => userLogout(navigate);
   const [current, setCurrent] = useState("dashboard");
+
+  const items1 = [
+    { key: "dashboard", label: "dashboard", icon: <LaptopOutlined /> },
+    { key: "profile", label: "profile", icon: <UserOutlined /> },
+    { key: "about", label: "about", icon: <NotificationOutlined /> },
+    {
+      key: "logout",
+      style: logoutbtn,
+      label: (
+        <Button
+          onClick={() => logout(navigate)}
+          type="primary"
+          icon={<LogoutOutlined />}
+          danger
+        >
+          logOut
+        </Button>
+      ),
+    },
+  ];
+
+  const items2 = [
+    { key: "dashboard", label: "dashboard", icon: <LaptopOutlined /> },
+    { key: "profile", label: "profile", icon: <UserOutlined /> },
+    { key: "about", label: "about", icon: <NotificationOutlined /> },
+  ];
 
   const onClick = (e) => {
     setCurrent(e.key);
@@ -65,18 +61,8 @@ export const PageLayout = () => {
           mode="horizontal"
           onClick={onClick}
           selectedKeys={[current]}
-          //items={items1}
-        >
-          <Menu.Item
-            key= "logout"
-            icon= {<LogoutOutlined />}
-            style={styleLogout}
-            >
-              <Button type="primary" danger>
-                logOut
-              </Button>
-          </Menu.Item>
-        </Menu>
+          items={items1}
+        />
       </Header>
       <Layout>
         <Sider width={200} className="site-layout-background">
@@ -91,13 +77,6 @@ export const PageLayout = () => {
             }}
             items={items2}
           />
-          <Menu
-          theme="danger"
-          mode="inline"
-          onClick={() => logout()}
-          style={{ float: "inline-end" }}
-          items={danger}
-        />
         </Sider>
         <Layout
           style={{
@@ -109,8 +88,8 @@ export const PageLayout = () => {
             style={{
               padding: 24,
               margin: 0,
-              maxHeight: 500,
-              maxWidth: 500,
+              Height: 500,
+              Width: 500,
             }}
           >
             <Outlet />
@@ -120,8 +99,3 @@ export const PageLayout = () => {
     </Layout>
   );
 };
-
-const styleLogout = {
-  position: "absolute",
-  right: "10px"
-}
