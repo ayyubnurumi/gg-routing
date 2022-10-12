@@ -49,7 +49,7 @@ export const userLogin = async (payload, navigate) => {
     // create data structure about user credentials from all API hit above and save to local storage
     const userCredentials = {
       ...loginResults.data.data,
-      accessToken: getAccessToken.data,
+      accessToken: getAccessToken.data
     };
     // console.log(userCredentials)
 
@@ -75,6 +75,7 @@ export const userLogin = async (payload, navigate) => {
 
 export const userLogout = (navigate) => {
   localStorage.removeItem("userCredentials");
+  localStorage.removeItem("username");
   message.success("logout success!!!");
   navigate("/login");
 };

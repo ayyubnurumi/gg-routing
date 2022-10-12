@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Outlet, useNavigate } from "react-router";
 import { userLogout } from "../service/AuthService";
-import { Button, Layout, Menu } from "antd";
+import { Button, Layout, Menu, Switch } from "antd";
 import {
   LaptopOutlined,
   NotificationOutlined,
   UserOutlined,
   LogoutOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
 } from "@ant-design/icons";
 
 const { Header, Content, Sider } = Layout;
@@ -20,6 +22,16 @@ export const PageLayout = () => {
   const navigate = useNavigate();
   const logout = () => userLogout(navigate);
   const [current, setCurrent] = useState("dashboard");
+  const [collapsed, setCollapsed] = useState(false);
+  const [theme, setTheme] = useState('dark');
+
+  const changeTheme = (value) => {
+    setTheme(value ? 'dark' : 'light');
+  };
+
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
 
   const items1 = [
     { key: "dashboard", label: "dashboard", icon: <LaptopOutlined /> },
@@ -57,7 +69,7 @@ export const PageLayout = () => {
       <Header className="header">
         <div className="logo" />
         <Menu
-          theme="dark"
+          theme={theme}
           mode="horizontal"
           onClick={onClick}
           selectedKeys={[current]}
@@ -65,15 +77,38 @@ export const PageLayout = () => {
         />
       </Header>
       <Layout>
-        <Sider width={200} className="site-layout-background">
+        <Sider
+          width={200}
+          className="site-layout-background"
+          trigger={null}
+          collapsible
+          collapsed={collapsed}
+        >
+          <Switch
+            checked={theme === 'dark'}
+            onChange={changeTheme}
+            checkedChildren="Dark"
+            unCheckedChildren="Light"
+            style={{ margin: 10, marginLeft: 14, marginBottom: 5 }}
+          />
+          <Button
+            type="primary"
+            onClick={toggleCollapsed}
+            style={{ margin: 10, marginLeft: 14, marginTop: 5 }}
+          >
+            {React.createElement(
+              collapsed ? MenuUnfoldOutlined : MenuFoldOutlined
+            )}
+          </Button>
           <Menu
             mode="inline"
+            theme={theme}
             onClick={onClick}
             selectedKeys={[current]}
             openKeys={[current]}
             style={{
               height: "100%",
-              borderRight: 0,
+              border: 0
             }}
             items={items2}
           />

@@ -26,11 +26,11 @@ export const Login = () => {
         newLoadings[index] = false;
         return newLoadings;
       });
-    }, 6000);
+    }, 1000);
   };
 
   const onFinish =()=> userLogin(payload, navigate)
-  localStorage.setItem('username', JSON.stringify(payload.user))
+  // localStorage.setItem('username', JSON.stringify(payload.user))
 
   return (
     <div className="login">
