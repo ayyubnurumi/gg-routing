@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Content2 = () => {
+export const About = () => {
     return(
         <p>this is about</p>
     )

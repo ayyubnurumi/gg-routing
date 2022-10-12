@@ -56,8 +56,7 @@ export const userLogin = async (payload, navigate) => {
     // actually save to local storage.  userCredentials data and key need to format to string before saving,
     // otherwise it will be convert to an object see https://prnt.sc/sqmjF9Ri51dN
     localStorage.setItem(
-      "userCredentials",
-      JSON.stringify(userCredentials)
+      "userCredentials", JSON.stringify(userCredentials)
     );
 
     // redirect to dashboard or whatever your page after auth

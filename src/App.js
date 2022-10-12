@@ -8,9 +8,9 @@ import { PublicRoute } from './Routes/PublicRoute';
 import { ProtectedRoute } from './Routes/ProtectedRoute';
 import { AuthLayout } from './Auth/AuthLayout';
 import { Dashboard } from './Pages/dashboard';
-import { Content1 } from './Pages/content1';
-import { Content2 } from './Pages/content2';
+import { About } from './Pages/about';
 import { Agreement } from './Auth/Agreement';
+import { Profile } from './Pages/profile';
 
 function App() {
   return (
@@ -27,8 +27,8 @@ function App() {
         <Route path='/' element={<ProtectedRoute />} >
           <Route path='/' element={<PageLayout />} >
             <Route index path='/dashboard' element={<Dashboard />} />
-            <Route path='/profile' element={<Content1 />} />
-            <Route path='/about' element={<Content2 />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/about' element={<About />} />
             <Route path='/' element={<Navigate to={'/dashboard'} replace />} />
           </Route>
         </Route>
