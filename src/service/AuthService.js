@@ -68,8 +68,8 @@ export const userLogin = async (payload, navigate) => {
     // console.log(getAccessToken.data);
     // console.log(userCredentials);
   } catch (error) {
-    //console.log(error);
-    message.error('username or password or both are wrong!!!', 3);
+    console.log(error);
+    message.error(error.message, 3);
   }
 };
 
