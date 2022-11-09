@@ -10,6 +10,7 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
 } from "@ant-design/icons";
+import { Footer } from "antd/lib/layout/layout";
 
 const { Header, Content, Sider } = Layout;
 
@@ -67,8 +68,9 @@ export const PageLayout = () => {
   return (
     <Layout>
       <Header className="header">
-        <div className="logo" />
+        <div className="logo"><img src="mekkake.png" alt="logo"/></div>
         <Menu
+          className="header-menu"
           theme={theme}
           mode="horizontal"
           onClick={onClick}
@@ -107,30 +109,25 @@ export const PageLayout = () => {
             selectedKeys={[current]}
             openKeys={[current]}
             style={{
-              height: "100%",
+              height: "80vh",
               border: 0
             }}
             items={items2}
           />
         </Sider>
-        <Layout
+        <Content
+          className="site-layout-background"
           style={{
-            padding: "0 24px 24px",
+            padding: 24,
+            margin: 0,
+            Height: 500,
+            Width: 500,
           }}
         >
-          <Content
-            className="site-layout-background"
-            style={{
-              padding: 24,
-              margin: 0,
-              Height: 500,
-              Width: 500,
-            }}
-          >
-            <Outlet />
-          </Content>
-        </Layout>
+          <Outlet />
+        </Content>
       </Layout>
+      <Footer style={{textAlign: 'center'}} >made by ayyub</Footer>
     </Layout>
   );
 };

@@ -1,1 +1,22 @@
 @import '~antd/dist/antd.css';
+
+.header {
+    display: flex;
+    flex-direction: row;
+    height: 65px;
+}
+
+.header div.logo {
+    padding: auto;
+    margin: auto 50px auto 0;
+}
+
+.header div.logo img {
+    height: 50px;
+    width: 50px;
+}
+
+.header-menu {
+    width: 100%;
+    margin: auto;
+}
