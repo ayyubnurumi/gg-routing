@@ -1,9 +1,11 @@
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input } from "antd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { userLogin } from "../service/AuthService";
+
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Checkbox, Form, Input } from "antd";
 import "./Auth.css";
+
+import { userLogin } from "../service/AuthService";
 
 export const Login = () => {
   const navigate = useNavigate()
@@ -26,7 +28,7 @@ export const Login = () => {
         newLoadings[index] = false;
         return newLoadings;
       });
-    }, 1000);
+    }, 321);
   };
 
   const onFinish =()=> userLogin(payload, navigate)
