@@ -28,7 +28,7 @@ export const Login = () => {
         newLoadings[index] = false;
         return newLoadings;
       });
-    }, 321);
+    }, 1234);
   };
 
   const onFinish =()=> userLogin(payload, navigate)
